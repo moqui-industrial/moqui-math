@@ -365,7 +365,7 @@ The metamodel separates algorithmic definition/routing from execution instances 
 - **`MathModelData`**: Pure data binding table linking the concrete mathematical entities (`Tensor`, `Matrix`, `Vector`, `MeshKCell`, `GraphVertex`, etc.) consumed or produced by the model.
 - **`MathModelRun`**: Tracks training, eval, or inference runs with status flows, metrics, events, and performance records (`MathModelPerf`).
 
-### Declarative Mathematical DSL & Fluent API Alignment
+### Java ecosystem: Mathematical DSL & Fluent API Alignment
 
 The relational model is reflected 1:1 into the JVM via **Groovy Math** (`groovy-math`), providing a declarative DSL and type-safe Fluent API that directly correspond to the underlying entity definitions:
 
@@ -422,4 +422,21 @@ None.
 
 ## Install
 
+For MR-Moqui, follow the Rust-runtime instructions below. For Java Moqui only:
+
     ./gradlew getComponent -Pcomponent=moqui-math
+
+## MR-Moqui runtime
+
+On the `mr-moqui` branch this component supplies XML entity definitions and seed
+data for [MR-Moqui master](https://github.com/moqui/mr-moqui). Install it under
+`mr-moqui/runtime/component/moqui-math` and run `./moq load seed-initial seed`
+from the framework root. The gateway uses the same physical SQL naming as the
+framework's default `java` naming mode; do not point it at a legacy quoted-name
+Rust database without migrating that database first.
+
+Groovy Math, JVM, JDBC, DJL, JNI and Panama examples above describe integrations
+for the Java ecosystem. They are not execution engines bundled by this XML
+component or loaded by MR-Moqui. Rust/JavaScript services or configured external
+providers execute calculations on MR-Moqui. Apache Camel and Quarkus references
+are examples of external implementations, not runtime requirements.
