@@ -440,3 +440,13 @@ for the Java ecosystem. They are not execution engines bundled by this XML
 component or loaded by MR-Moqui. Rust/JavaScript services or configured external
 providers execute calculations on MR-Moqui. Apache Camel and Quarkus references
 are examples of external implementations, not runtime requirements.
+
+
+For ONNX trajectory inference, moqui-device now supplies the native Moqui service
+`moqui.device.OnnxServices.infer#TrajectoryWaypoints`, invoked in-process by
+`run#RobotArmTrajectoryPlanner`. Build MR-Moqui with `moqui-device/onnx` and
+configure `ORT_DYLIB_PATH` to enable `ort`/ONNX Runtime CPU. The registered
+MathModelDefContent artifact supplies the model path; the default input contract
+matches Java/DJL's 12 start/goal coordinates. This remains optional: moqui-math's
+model and normal moqui-device use require neither ONNX Runtime nor Mantle.
+See the [native/isolated example](https://github.com/moqui/moqui-device/tree/mr-moqui/examples/onnx-obstacle).
