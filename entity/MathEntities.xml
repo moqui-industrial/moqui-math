@@ -1580,7 +1580,7 @@ along with this software (see the LICENSE.md file). If not, see
                 Specifies which dimension or dimensions of input to calculate the norm across.
                 If dimensions is None, the norm will be calculated across all dimensions of input.
                 It must match the norm order.</description></field>
-        <field name="keepDimensions" type="text-indicator" default="N">
+        <field name="keepDimensions" type="text-indicator" default="'N'">
             <description>whether the output tensors have dimensions retained or not.</description></field>
         <field name="normValue" type="number-decimal" not-null="true"/>
 
@@ -3375,9 +3375,9 @@ along with this software (see the LICENSE.md file). If not, see
                 For a directed graph, a loop adds one to the in degree and one to the out degree.
                 An isolated vertex is a vertex with degree zero; that is, a vertex that is not an endpoint of any edge.
                 A leaf vertex is a vertex with degree one.</description></field>
-        <field name="isCutVertex" type="text-indicator" default="N">
+        <field name="isCutVertex" type="text-indicator" default="'N'">
             <description>A vertex the removal of which would disconnect the remaining graph.</description></field>
-        <field name="notBelongToEdge" type="text-indicator" default="N">
+        <field name="notBelongToEdge" type="text-indicator" default="'N'">
             <description>A vertex may exist in a graph and not belong to an edge.</description></field>
         <field name="label" type="text-short"/>
         <field name="positionVectorId" type="id">
@@ -3776,7 +3776,7 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="sequenceNum" type="number-integer" not-null="true" default="1">
             <description>Sequence index to sort vertices in cells of size greater than 0.</description></field>
         <!-- Indicatore del tipo di relazione -->
-        <field name="isUniqueReference" type="text-indicator" default="N">
+        <field name="isUniqueReference" type="text-indicator" default="'N'">
             <description>Indicates whether this is the only vertex associated with the cell (required if dimension=0).
                 - 'Y' for vertex cells (0-cells).
                 - 'N' for cells with multiple vertices (cells greater than 0).
