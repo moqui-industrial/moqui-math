@@ -424,6 +424,9 @@ For MR-Moqui, follow the Rust-runtime instructions below. For Java Moqui only:
 
 ## MR-Moqui runtime
 
+See [model migration notes](MIGRATION-STATUS.md) for the model scope and focused
+XML/JavaScript regression checks.
+
 On the `mr-moqui` branch this component supplies XML entity definitions and seed
 data for [MR-Moqui](https://github.com/moqui/mr-moqui). Install it under
 `mr-moqui/runtime/component/moqui-math` and run the following commands from the
@@ -445,12 +448,14 @@ are examples of external implementations, not runtime requirements.
 The component itself is a portable entity model and data set. It contains no
 bundled Rust, JavaScript, Java, or Groovy calculation engine.
 
-
-For ONNX trajectory inference, moqui-device now supplies the native Moqui service
-`moqui.device.OnnxServices.infer#TrajectoryWaypoints`, invoked in-process by
-`run#RobotArmTrajectoryPlanner`. Build MR-Moqui with `moqui-device/onnx` and
-configure `ORT_DYLIB_PATH` to enable `ort`/ONNX Runtime CPU. The registered
-MathModelDefContent artifact supplies the model path; the default input contract
-matches Java/DJL's 12 start/goal coordinates. This remains optional: moqui-math's
-model and normal moqui-device use require neither ONNX Runtime nor Mantle.
-See the [native/isolated example](https://github.com/moqui/moqui-device/tree/mr-moqui/examples/onnx-obstacle).
+For ONNX trajectory inference, moqui-device supplies the native tool
+`TrajectoryGenerator` (the Rust port of the Groovy class
+`org.moqui.device.TrajectoryGenerator`, which used DJL). The service
+`moqui.device.TrajectoryPlannerServices.run#RobotArmTrajectoryPlanner` calls it
+in-process and writes the waypoints to the entities of this component. Build
+MR-Moqui with the `moqui-device/onnx` feature and set `ORT_DYLIB_PATH` to the
+ONNX Runtime library to enable it. The `MathModelDefContent` artifact of the
+model supplies the model location; the input is the 12 start and goal
+coordinates, as with DJL. Inference stays optional: this component's model and
+ordinary moqui-device use need neither ONNX Runtime nor Mantle. See
+[Trajectory planning on MR-Moqui](https://github.com/moqui/moqui-device/tree/mr-moqui#trajectory-planning-on-mr-moqui).

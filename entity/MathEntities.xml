@@ -4058,7 +4058,7 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="many" related="moqui.math.ParametricPathPoint" short-alias="pathPoints">
             <key-map field-name="approximatedFunctionId"/></relationship>
         <relationship type="many" related="moqui.math.ParametricPathEvent" short-alias="events">
-            <key-map field-name="parametricPathId"/></relationship>
+            <key-map field-name="approximatedFunctionId"/></relationship>
         <relationship type="one-nofk" related="moqui.math.Trajectory" short-alias="trajectory" mutable="true"/>    
         <index name="PPATH_BY_PARENT"><index-field name="parentPathId"/>
             <index-field name="compositionSequenceNum"/></index>
